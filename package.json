@@ -1,0 +1,27 @@
+{
+  "name": "discord-utils",
+  "version": "0.0.1",
+  "description": "A package to make easier your development in discord.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo Error: no test specified && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andrespolicrack/discord-utils.git"
+  },
+  "keywords": [
+    "discord",
+    "discord.js",
+    "util"
+  ],
+  "authors": [
+    "HardXploit",
+    "Andrespolicrack"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Andrespolicrack/discord-utils/issues"
+  },
+  "homepage": "https://github.com/Andrespolicrack/discord-utils#readme"
+}
