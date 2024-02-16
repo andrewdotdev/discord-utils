@@ -4,8 +4,8 @@ import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import * as colors from 'colors';
 
-export async function Subir(path: string, token: string, clientId: string) {
-    const commands = new Array();
+export async function slashCreate(path: string, token: string, clientId: string) {
+    const commands: any[] = [];
 
     fs.readdirSync(path + "/").forEach((dir) => {
         const slashcommandsFiles = fs.readdirSync(path + "/" + dir).filter(file => file.match(/\.(ts|js)$/));
