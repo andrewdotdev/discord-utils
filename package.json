@@ -23,5 +23,13 @@
   "bugs": {
     "url": "https://github.com/Andrespolicrack/discord-utils/issues"
   },
-  "homepage": "https://github.com/Andrespolicrack/discord-utils#readme"
+  "homepage": "https://github.com/Andrespolicrack/discord-utils#readme",
+  "devDependencies": {
+    "@types/node": "^20.11.19"
+  },
+  "dependencies": {
+    "@discordjs/rest": "^2.2.0",
+    "colors": "^1.4.0",
+    "discord-api-types": "^0.37.70"
+  }
 }
