@@ -4,7 +4,8 @@
   "description": "A package to make easier your development in discord.js",
   "main": "dist/main.js",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",

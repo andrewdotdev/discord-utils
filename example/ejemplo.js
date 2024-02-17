@@ -1,5 +1,5 @@
 const { DiscordUtils } = require('../dist/main.js');
-const { Client, GatewayIntentBits } = require('discord.js');
+const { GatewayIntentBits } = require('discord.js');
 
 const client = new DiscordUtils({
   intents: [
@@ -11,7 +11,7 @@ const client = new DiscordUtils({
       GatewayIntentBits.GuildVoiceStates,
       GatewayIntentBits.DirectMessages,
   ],
-  slashFolder: `./examples/`,
+  slashFolder: `./commands/`,
 });
 
 (async () => {    await client.login("TOKEN")
