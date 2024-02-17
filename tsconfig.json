@@ -1,18 +1,38 @@
 {
   "compilerOptions": {
-      "target": "ES2022",
       "module": "CommonJS",
-      "outDir": "./dist",
-      "moduleResolution": "Node",
+      "target": "ESNext",
+      "lib": [
+          "ESNext",
+          "WebWorker"
+      ],
+      "moduleResolution": "node",
+      "declaration": true,
+      "sourceMap": false,
       "strict": true,
+      "esModuleInterop": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "preserveConstEnums": true,
+      /* Type Checking */
       "noImplicitAny": true,
-      "declaration": false,
-      "skipLibCheck": true,
       "strictNullChecks": true,
-      "resolveJsonModule": true,
-      "noEmit": true,
-      "allowImportingTsExtensions": true
+      "strictFunctionTypes": true,
+      "noImplicitThis": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "noImplicitReturns": true,
+      "noFallthroughCasesInSwitch": true,
+      "skipLibCheck": false,
+      "noErrorTruncation": true,
+      "outDir": "./dist",
+      "stripInternal": true,
   },
-  "include": ["lib"],
-  "exclude": ["node_modules"]
+  "exclude": [
+      "**/dist",
+      "**/__test__"
+  ],
+  "include": [
+      "lib"
+  ]
 }
