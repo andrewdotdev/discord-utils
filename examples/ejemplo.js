@@ -1,4 +1,4 @@
-const { DiscordUtils } = require('./dist/main.js');
+const { DiscordUtils } = require('../dist/main.js');
 const { Client, GatewayIntentBits } = require('discord.js');
 
 const client = new DiscordUtils({

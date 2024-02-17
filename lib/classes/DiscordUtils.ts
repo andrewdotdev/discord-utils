@@ -92,7 +92,7 @@ export class DiscordUtils extends Client {
                 const date = new Date();
                 console.log(colors.cyan(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]`) + '' + colors.green(' Slash Commands Uploaded'))
             } catch (err) {
-                throw new Error(`${err}`)
+                throw new Error(colors.red(`${err}`))
             }
         }
     }

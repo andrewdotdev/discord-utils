@@ -2,9 +2,10 @@
   "name": "discord-utils",
   "version": "0.0.1",
   "description": "A package to make easier your development in discord.js",
-  "main": "dist/main.js",
+  "main": "dist/cjs/main.js",
+  "module": "dist/esm/main.js",
   "scripts": {
-    "biuild": "tsc"
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
