@@ -1,24 +1,21 @@
 import colors from 'colors';
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
-import "discord.js";
 import { searchFilesRecursive } from "taskwizard";
-import { Client } from 'discord.js';
+import { Client, ClientOptions } from 'discord.js';
 
-interface Config {
+interface Config extends ClientOptions {
     slashFolder: string;
-    token: string;
-    clientDjs: Client<boolean>;
-    clientId: string;
     eventsFolder?: string;
 }
 
 
-export class DiscordUtils {
+
+export class DiscordUtils extends Client {
     public slashFolder: string;
-    public token: string;
-    public clientId: string;
-    public clientDjs: Client<boolean>;
+    public eventsFolder?: string;
+    public id: any;
+    public clientId: any;
     
     /**
      * Los constuctores son metodos que se ejecutan al instanciar una clase es decir cuando haces:
@@ -27,16 +24,13 @@ export class DiscordUtils {
      * en nuestro caso lo que hace es:
      * 
      */
+
     constructor(config: Config) {
+        super(config as ClientOptions);
         // comprobar que los datos requeridos esten presentes
-        if(!config.clientDjs) throw new Error(colors.red("The Client<boolean> of Discord.js is required"))
-        if (!(config.clientDjs instanceof Client) || typeof config.clientDjs.options.intents === "undefined") {
-            throw new Error(colors.red("clientDjs must be an instance of Client<boolean>"));
-        }
-        
         if (!config.slashFolder) throw new Error(colors.red('Slash Folder is required'));
-        if (!config.token) throw new Error(colors.red("The bot token is required"));
-        if (!config.clientId) throw new Error(colors.red("The clientId is required"));
+        // if (!this.token) throw new Error(colors.red("The bot token is required"));
+        // if (!this.id) throw new Error(colors.red("The clientId is required"));
         // if (!(typeof config.clientId === "number")) throw new Error(colors.red("The clientId needs to be a Int"))
 
         /**
@@ -50,22 +44,22 @@ export class DiscordUtils {
          * DiscordUtils.slashFolder = config.slashFolder pero claro solo se coloca this
          */ 
         this.slashFolder = config.slashFolder;
-        this.token = config.token;
-        this.clientDjs = config.clientDjs;
-        this.clientId = config.clientId;
+        this.token = this.token;
+        this.clientId = this.application?.id;
     }
 
-    public async login(): Promise<void> {
-        const { token, clientDjs } = this;
+    public override async login(token: string): Promise<any> {
         try {
-            await clientDjs.login(token);
-            if (clientDjs.user) {
+            await super.login(token);
+            if (this.user) {
                 const date = new Date();
-                console.log(colors.cyan(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]`) + colors.green(` Logged in as ${clientDjs.user.username}`));
+                console.log(colors.cyan(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]`) + colors.green(` Logged in as ${this.user.username}`));
             } else {
                 const date = new Date();
-                throw new Error(colors.cyan(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]`) + colors.red(' Logged in'));
+                console.log(colors.cyan(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]`) + colors.red(' Logged in'));
             }
+            this.clientId = this.application?.id;
+            this.token = token;
         } catch (err) {
             const date = new Date();
             throw new Error(colors.cyan(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]`) + colors.red(` Logging failed. More information: ${err}`));
@@ -76,7 +70,8 @@ export class DiscordUtils {
     public async slashCreate(): Promise<void> {
         const { slashFolder, token, clientId } = this;
         const commands: any[] = [];
-        
+        const date = new Date();
+        if(!token) throw new Error(colors.cyan(`[${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}]`) + colors.red(' First login with "<DUtils>.login(token)"'))
         const rest = new REST({ version: "10" }).setToken(token);
         const commandsFiles = await searchFilesRecursive(slashFolder);
         for (const file of commandsFiles) {

@@ -1,7 +1,7 @@
 const { DiscordUtils } = require('./dist/main.js');
 const { Client, GatewayIntentBits } = require('discord.js');
 
-const client = new Client({
+const client = new DiscordUtils({
   intents: [
       GatewayIntentBits.Guilds,
       GatewayIntentBits.GuildMembers,
@@ -10,15 +10,10 @@ const client = new Client({
       GatewayIntentBits.GuildPresences,
       GatewayIntentBits.GuildVoiceStates,
       GatewayIntentBits.DirectMessages,
-  ]
-});
-
-const DUtils = new DiscordUtils({
-  clientId: '',
-  clientDjs: client,
-  token: '',
+  ],
   slashFolder: `./examples/`,
 });
 
-(async () => {  await DUtils.slashCreate() 
-  await DUtils.login() })();
+(async () => {    await client.login("TOKEN")
+await client.slashCreate() 
+ })();
